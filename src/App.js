@@ -15,12 +15,18 @@ const datos = [
     description: "Esta es la description del numero 2",
     completed: true,
   },
+  {
+    id: 3,
+    title: "Cafe",
+    description: "Me gustan el cafe negro",
+    completed: true,
+  },
 ];
 
 function App() {
   
   const [datosActual, datosActualizando] = useState(datos)
-
+  const [editar, setEditar] = useState(null)
 
   const eliminar = (ID) =>{
       const eliminarDatos = datosActual.filter(datosActual => datosActual.id !== ID)
@@ -28,16 +34,29 @@ function App() {
   }
 
   const terminado = (ID) =>{
-
     const terminar = datosActual.map(datosActual =>(
         datosActual.id === ID
         ? {...datosActual, completed: !datosActual.completed}
         :datosActual
       ))
     datosActualizando(terminar);
+  }; 
 
-  };
+  const Agregar = (todo) =>{
 
+    const newDatos = {
+      id: Date.now(),
+      ...todo,
+      completed: false
+    }
+
+    const agregarValor = [
+        newDatos,
+        ...datos
+    ]
+
+    datosActualizando(agregarValor)
+  }
   return (
     <>
         <div className="container mt-4">
@@ -47,10 +66,14 @@ function App() {
                    datosActual={datosActual}
                    eliminar={eliminar}
                    terminado={terminado}
+                   setEditar={setEditar}
                    />
                 </div>
                 <div className="col-4">
-                    <TodoForm/>
+                    <TodoForm
+                    Agregar={Agregar}
+                    editar={editar}
+                    />
                 </div>
             </div>  
         </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import Todo from "./Todo";
 
-function TodoList({datosActual, eliminar, terminado}) {
+function TodoList({datosActual, eliminar, terminado, setEditar}) {
   return (  
     <div>
       <h1 className="text-right">Soy TodoList</h1>
@@ -11,6 +11,7 @@ function TodoList({datosActual, eliminar, terminado}) {
                 todo={dato}
                 eliminar={eliminar} 
                 terminado={terminado}
+                setEditar={setEditar}
               />
             )
           )
